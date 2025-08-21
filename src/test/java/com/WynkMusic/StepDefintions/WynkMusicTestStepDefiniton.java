@@ -1,8 +1,8 @@
 package com.WynkMusic.StepDefintions;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 
+import com.Automation.utility.BaseTest;
 import com.WynkMusic.PageObjects.WnykMusic;
 import com.WynkMusic.Utilities.WebDriverUtility;
 
@@ -10,15 +10,15 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
-public class WynkMusicTestStepDefiniton {
-	static WebDriver   driver;
+public class WynkMusicTestStepDefiniton extends BaseTest {
+	
 	static WebDriverUtility webDriverUtility;
 	static WnykMusic wynkMusic;
 	@Given("Lanuch The Browser and Navigate To WynkMusic {string} and validate the DisplayScreen")
 	public void lanuch_the_browser_and_navigate_to_wynk_music_and_validate_the_display_screen(String url) {
 		System.out.println(url);
 		webDriverUtility = new WebDriverUtility();
-		driver= new ChromeDriver();
+		
 		webDriverUtility.navigateApp(url, driver);
 		webDriverUtility.maximizeBrowser(driver);
 		webDriverUtility.getSourceCode(driver);
