@@ -7,7 +7,7 @@ Feature: Play Music Stop Music
     Then Click on the Play Btn and after few second pause the song
     Then Navigate HomePage and Click On The SearchBar and SearchWith "<songName2>"
     Then Click on the Play Btn and after few second pause the song
-    Then Close The Browser
+   
 
     Examples: 
       | url                | songName1        | songName2                     |
