@@ -1,19 +1,30 @@
 package com.Automation.utility;
 
+import com.Automation.pageObejct.ExtentTestManager;
+import com.Automation.pageObejct.ScenarioErrorContext;
+import com.aventstack.extentreports.ExtentTest;
+
 import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Before;
 import io.cucumber.java.BeforeStep;
 import io.cucumber.java.Scenario;
 
-public class Hooks extends BaseTest {
-
+public class Hooks extends BaseTest  {
+	
     // Runs once before each scenario
     @Before(order = 0)
     public void launchBrowser(Scenario scenario) {
         System.out.println("====[ BEFORE SCENARIO ]====");
         System.out.println("Starting Scenario: " + scenario.getName());
         setUp();
+       ExtentTest extent = ExtentTestManager.startTest(scenario.getName(), "Scenario Execution");
+      
+       extent.createNode(scenario.getName());
+       
+       
+        
+       
     }
 
     // Optional: Additional setup with higher order (executes after lower order)
@@ -43,8 +54,33 @@ public class Hooks extends BaseTest {
 
     // Runs once after each scenario
     @After(order = 0)
-    public void closeBrowser() {
+    public void afterScenario(Scenario scenario) {
         System.out.println("====[ AFTER SCENARIO ]====");
         tearDown();
+        
+        if (scenario.isFailed()) {
+            Throwable error = ScenarioErrorContext.getError();
+            if (error != null) {
+               
+                ExtentTestManager.getTest().fail("Scenario failed with exception: " + error.getMessage());
+                ExtentTestManager.getTest().fail(error); // logs full stack trace
+
+            } else {
+                ExtentTestManager.getTest().fail("Scenario failed, but no exception captured.");
+            }
+        } else {
+            ExtentTestManager.getTest().pass("Scenario passed successfully.");
+        }
+        ExtentTestManager.flush();
+        ScenarioErrorContext.clear();
+
+       
+       
     }
+    
+    
+	
+
+
+
 }
