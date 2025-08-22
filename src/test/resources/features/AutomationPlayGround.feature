@@ -1,7 +1,7 @@
 @AutomationPlayGround
 Feature: Play Music Stop Music
 
-  Scenario Outline: Navigate to WynkMusic and Play music and stop music
+  Scenario Outline: Automation playground cucumber frame work test
     Given Lanuch The Browser and Navigate To AutomationPlaygrounf "<url>" and validate the DisplayScreen
     And Send the username into userName text filed "<username>"
     And Send the emailID into emailId text filed "<emailID>"
